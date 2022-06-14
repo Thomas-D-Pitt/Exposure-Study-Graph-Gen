@@ -70,7 +70,6 @@ def makePlot():
             i = 0
             while i * 11 + 2 + getattr(constants, QUESTION) < len(df["Responses"].columns):
                 val = df["Responses"].iloc[ROW,i * 11 + 2 + getattr(constants, QUESTION)]
-                
                 if (isNaN(val) and IGNORE_NANS) or type(val) == str: #val is NaN
                     if QUESTION == "Q7" and type(val) == str:
                         if "*" in val:
@@ -80,7 +79,8 @@ def makePlot():
                             val = .5
                             dataPairs[i] = ((i+1, dataPairs[i][1] + val, dataPairs[i][2] + 1))
                 else:
-                    dataPairs[i] = ((i+1, dataPairs[i][1] + val, dataPairs[i][2] + 1))
+                    if int(val) != -1:
+                        dataPairs[i] = ((i+1, dataPairs[i][1] + val, dataPairs[i][2] + 1))
 
                 i += 1
 
